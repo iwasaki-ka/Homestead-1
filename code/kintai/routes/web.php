@@ -1,22 +1,17 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::get('/', function () {return view('login');})->name('login');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::post('/login', [LoginController::class, 'login'])->name('login');
 
-Auth::routes();
+Route::get('/login', function () {return view('login');})->name('login.get');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/syain/{syain_number}', function ($syain_number) {return view('syain', ['syain_number' => $syain_number]);})->name('syain');
+
+Route::get('/kanrisya/{syain_number}', function ($syain_number) { return view('kanrisya', ['syain_number' => $syain_number]);})->name('kanrisya');
+
+Route::get('/roumusi/{syain_number}', function ($syain_number) {return view('roumusi', ['syain_number' => $syain_number]);})->name('roumusi');
+
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

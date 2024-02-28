@@ -35,4 +35,6 @@
     "bin": [
         "bin/homestead"
     ]
+
+    
 }
