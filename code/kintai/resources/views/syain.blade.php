@@ -15,7 +15,6 @@
     </form>
 </x-layout>
 
-
 {{-- {{ route('dakoku') }}
 {{ route('kinmuhyou') }} --}}
 

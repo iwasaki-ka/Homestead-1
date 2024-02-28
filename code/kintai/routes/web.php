@@ -15,3 +15,5 @@ Route::get('/kanrisya/{syain_number}', function ($syain_number) { return view('k
 Route::get('/roumusi/{syain_number}', function ($syain_number) {return view('roumusi', ['syain_number' => $syain_number]);})->name('roumusi');
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+?>

@@ -21,4 +21,5 @@ class Syain extends Model implements Authenticatable
         'user_type',
     ];
 }
+
 ?>

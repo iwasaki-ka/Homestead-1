@@ -9,7 +9,7 @@ $title = 'ログインページ';
         <div>
             <label for="syain_number">社員番号</label>
             <input id="syain_number" type="text" name="syain_number" value="{{ old('syain_number') }}" required autofocus>
-            
+
             @if ($errors->has('syain_number'))
                 <span class="error">{{ $errors->first('syain_number') }}</span>
             @endif
@@ -20,3 +20,4 @@ $title = 'ログインページ';
         </div>
     </form>
 </x-layout>
+
