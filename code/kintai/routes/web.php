@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DakokuController;
 
 Route::get('/', function () {return view('login');})->name('login');
 
@@ -15,5 +16,12 @@ Route::get('/kanrisya/{syain_number}', function ($syain_number) { return view('k
 Route::get('/roumusi/{syain_number}', function ($syain_number) {return view('roumusi', ['syain_number' => $syain_number]);})->name('roumusi');
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::get('/dakoku/{syain_number}', [DakokuController::class, 'dakoku_view'])->name('dakoku');
+
+Route::post('/dakoku', [DakokuController::class, 'syukkin'])->name('dakoku.syukkin');
+
+Route::put('/dakoku/{kintai}', [DakokuController::class, 'taikin'])->name('dakoku.taikin');
+
 
 ?>

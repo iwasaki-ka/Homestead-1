@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKintaiTable extends Migration
+class CreateSyainTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateKintaiTable extends Migration
      */
     public function up()
     {
-        Schema::create('kintai', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('syain_number')->constrained('syain', 'syain_number');
-            $table->timestamp('start_time');
-            $table->timestamp('end_time');
+        Schema::create('syain', function (Blueprint $table) {
+            $table->string('syain_number')->unique();
+            $table->string('name');
+            $table->string('syozoku');
+            $table->string('user_type');
             $table->timestamps();
+
+            $table->primary('syain_number');
         });
     }
 
@@ -29,6 +31,6 @@ class CreateKintaiTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kintai');
+        Schema::dropIfExists('syain');
     }
 }

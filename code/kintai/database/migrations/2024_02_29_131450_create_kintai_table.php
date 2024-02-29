@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSyainTable extends Migration
+class CreateKintaiTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,14 @@ class CreateSyainTable extends Migration
      */
     public function up()
     {
-        Schema::create('syain', function (Blueprint $table) {
-            $table->integer('syain_number')->unique();
-            $table->string('name');
-            $table->string('syozoku');
-            $table->string('user_type');
+        Schema::create('kintai', function (Blueprint $table) {
+            $table->string('syain_number');
+            $table->string('month');
+            $table->time('start_time');
+            $table->time('end_time');
             $table->timestamps();
 
-            
-            $table->primary('syain_number');
+            $table->foreign('syain_number')->references('syain_number')->on('syain');
         });
     }
 
@@ -32,6 +31,6 @@ class CreateSyainTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('syain');
+        Schema::dropIfExists('kintai');
     }
 }
