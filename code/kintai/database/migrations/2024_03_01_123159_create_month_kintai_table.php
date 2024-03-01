@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKintaiTable extends Migration
+class CreateMonthKintaiTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class CreateKintaiTable extends Migration
      */
     public function up()
     {
-        Schema::create('kintai', function (Blueprint $table) {
+        Schema::create('month_kintai', function (Blueprint $table) {
             $table->increments('id');
             $table->string('syain_number');
-            $table->date('date');
-            $table->datetime('start_time');
-            $table->datetime('end_time')->nullable();
+            $table->string('month');
+            $table->decimal('total_work_hours', 8, 2)->default(0);
+            $table->integer('total_work_days');
             $table->timestamps();
-
-            $table->foreign('syain_number')->references('syain_number')->on('syain');
         });
     }
 
@@ -32,6 +30,6 @@ class CreateKintaiTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kintai');
+        Schema::dropIfExists('month_kintai');
     }
 }

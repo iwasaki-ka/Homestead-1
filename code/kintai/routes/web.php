@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DakokuController;
+use App\Http\Controllers\KinmuhyouController;
 
 Route::get('/', function () {return view('login');})->name('login');
 
@@ -21,7 +22,12 @@ Route::get('/dakoku/{syain_number}', [DakokuController::class, 'dakoku_view'])->
 
 Route::post('/dakoku', [DakokuController::class, 'syukkin'])->name('dakoku.syukkin');
 
-Route::put('/dakoku/{kintai}', [DakokuController::class, 'taikin'])->name('dakoku.taikin');
+Route::put('/dakoku/{syain_number}', [DakokuController::class, 'taikin'])->name('dakoku.taikin');
+
+
+Route::get('/showKintai/{syain_number}', [KinmuhyouController::class, 'showKintai'])->name('showKintai');
+
+Route::get('/kinmuhyou_detail/{syain_number}/{month}', [KinmuhyouController::class, 'kinmuhyou_detail'])->name('kinmuhyou_detail');
 
 
 ?>

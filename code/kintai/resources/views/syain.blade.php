@@ -7,7 +7,7 @@
    </div>
     <ul>
       <li><a href="{{ route('dakoku', ['syain_number' => $syain_number]) }}">出勤・退勤登録</a></li>
-      <li><a href="">勤務表</a></li>
+      <li><a href="{{ route('showKintai', ['syain_number' => $syain_number]) }}">勤務表</a></li>
     </ul>
     <form method="POST" action="{{ route('logout') }}">
         @csrf
@@ -15,6 +15,4 @@
     </form>
 </x-layout>
 
-
-{{-- {{ route('kinmuhyou') }} --}}
 

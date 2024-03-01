@@ -12,24 +12,24 @@
     <input type="submit" value="出勤">
    </form>
    </div>
-   @if($kintai && ($kintai->id || $kintai->end_time == "00:00:00"))
+   @if($kintai && $kintai->start_time && $kintai->end_time == null)
    <div class="dakoku_button">
-   <form method="post" action="{{ route('dakoku.taikin', ['kintai' => $kintai->id]) }}">
-    @csrf
-    @method('PUT')
-    <input type="submit" value="退勤">
-   </form>
+    <form method="post" action="{{ route('dakoku.taikin', ['syain_number' => $syain_number]) }}">
+        @csrf
+        @method('PUT')
+        <input type="submit" value="退勤">
+    </form>
    </div>
    @endif
    <div>
     @if($kintai)
-        @if($kintai->start_time != "00:00:00")
-            <p>出勤時刻: {{ $kintai->start_time }}</p>
-        @endif
-        @if($kintai->end_time != "00:00:00")
-            <p>退勤時刻: {{ $kintai->end_time }}</p>
-        @endif
+    @if($kintai->start_time != "00:00:00")
+        <p>出勤時刻: {{ $kintai->start_time }}</p>
     @endif
+    @if($kintai->end_time != "00:00:00")
+        <p>退勤時刻: {{ $kintai->end_time }}</p>
+    @endif
+@endif
 </div>
    <form method="GET" action="{{ route('syain', ['syain_number' => $syain_number]) }}">
     @csrf
