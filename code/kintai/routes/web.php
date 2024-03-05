@@ -24,10 +24,12 @@ Route::post('/dakoku', [DakokuController::class, 'syukkin'])->name('dakoku.syukk
 
 Route::put('/dakoku/{syain_number}', [DakokuController::class, 'taikin'])->name('dakoku.taikin');
 
-
 Route::get('/showKintai/{syain_number}', [KinmuhyouController::class, 'showKintai'])->name('showKintai');
 
 Route::get('/kinmuhyou_detail/{syain_number}/{month}', [KinmuhyouController::class, 'kinmuhyou_detail'])->name('kinmuhyou_detail');
 
+Route::get('/edit_kintai/{syain_number}/{date}', [KinmuhyouController::class, 'editKintai'])->name('edit_kintai');
+
+Route::put('/update_kintai/{id}', [KinmuhyouController::class, 'updateKintai'])->name('update_kintai');
 
 ?>

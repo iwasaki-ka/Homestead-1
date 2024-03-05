@@ -2,7 +2,7 @@
     <div class="smalltitle">
         <h2>勤務表詳細</h2>
         <div class="loginjouhou">
-        <p>社員番号: {{ $syain_number }}</p>
+            <p>社員番号: {{ $syain_number }}  氏名: {{ session('user')->name }}</p>
        </div>
       </div>
     <table class="kintai-table">
@@ -18,15 +18,17 @@
         <td>{{ $record->date }}</td>
         <td>{{ \Carbon\Carbon::parse($record->start_time)->format('H:i') }}</td>
         <td>{{ \Carbon\Carbon::parse($record->end_time)->format('H:i') }}</td>
-        <td>1:00</td>
+        <td>{{ sprintf('%02d:%02d', floor($record->break_time / 60), $record->break_time % 60) }}</td>
         @php
             $start_time = \Carbon\Carbon::parse($record->start_time);
             $end_time = \Carbon\Carbon::parse($record->end_time);
-            $work_hours = $end_time->diffInMinutes($start_time) / 60 - 1;
+            $break_time = $record->break_time / 60;
+            $work_hours = $end_time->diffInMinutes($start_time) / 60 - $break_time;
             $hours = floor($work_hours);
             $minutes = ($work_hours - $hours) * 60;
         @endphp
         <td>{{ sprintf('%02d:%02d', $hours, $minutes) }}</td>
+        <td><a href="{{ route('edit_kintai', ['syain_number' => $syain_number, 'date' => $record->date]) }}">変更</a></td>
     </tr>
     @endforeach
     </table>

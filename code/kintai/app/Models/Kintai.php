@@ -18,5 +18,6 @@ class Kintai extends Model
         'start_time',
         'end_time',
         'id',
+        'break_time',
     ];
 }

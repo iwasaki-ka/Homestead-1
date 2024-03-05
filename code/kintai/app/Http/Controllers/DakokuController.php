@@ -25,6 +25,7 @@ public function syukkin(Request $request)
             'start_time' => now()->format('Y-m-d H:i:s'),
             'end_time' => null,
             'date' => now()->format('Y-m-d'),
+            'break_time' => 60,
         ]);
         // 月のレコードを取得または作成し、出勤日数を更新
         $month = now()->format('Y-m');
