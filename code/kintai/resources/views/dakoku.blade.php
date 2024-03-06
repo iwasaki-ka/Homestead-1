@@ -6,34 +6,33 @@
     </div>
    </div>
    <div class="dakoku_button">
-   <form method="post" action="{{ route('dakoku.syukkin') }}">
-    @csrf
-    <input type="hidden" name="syain_number" value="{{ $syain_number }}">
-    <input type="submit" value="出勤">
-   </form>
-   </div>
-   @if($kintai && $kintai->start_time && $kintai->end_time == null)
-   <div class="dakoku_button">
-    <form method="post" action="{{ route('dakoku.taikin', ['syain_number' => $syain_number]) }}">
+    <form method="post" action="{{ route('dakoku.syukkin') }}">
         @csrf
-        @method('PUT')
-        <input type="submit" value="退勤">
+        <input type="hidden" name="syain_number" value="{{ $syain_number }}">
+        <input type="submit" value="出勤" {{ $kintai && $kintai["day{$day}_start_time"] ? 'disabled' : '' }}>
     </form>
+</div>
+@if($kintai)
+    @if($kintai["day{$day}_start_time"] && $kintai["day{$day}_end_time"] == null)
+    <div class="dakoku_button">
+        <form method="post" action="{{ route('dakoku.taikin', ['syain_number' => $syain_number]) }}">
+            @csrf
+            @method('PUT')
+            <input type="submit" value="退勤" {{ $kintai["day{$day}_end_time"] ? 'disabled' : '' }}>
+        </form>
    </div>
    @endif
    <div>
-    @if($kintai)
-    @if($kintai->start_time != "00:00:00")
-        <p>出勤時刻: {{ $kintai->start_time }}</p>
+    @if($kintai["day{$day}_start_time"] != "00:00:00")
+        <p>出勤時刻: {{ $kintai["day{$day}_start_time"] }}</p>
     @endif
-    @if($kintai->end_time != "00:00:00")
-        <p>退勤時刻: {{ $kintai->end_time }}</p>
+    @if($kintai["day{$day}_end_time"] != "00:00:00")
+        <p>退勤時刻: {{ $kintai["day{$day}_end_time"] }}</p>
     @endif
 @endif
 </div>
-   <form method="GET" action="{{ route('syain', ['syain_number' => $syain_number]) }}">
+<form method="GET" action="{{ route('syain', ['syain_number' => $syain_number]) }}">
     @csrf
     <button type="submit">戻る</button>
 </form>
 </x-layout>
-

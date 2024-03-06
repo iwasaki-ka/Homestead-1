@@ -15,9 +15,14 @@ class Kintai extends Model
     protected $fillable = [
         'syain_number',
         'date',
-        'start_time',
-        'end_time',
-        'id',
-        'break_time',
+        'updated_at',
+        'created_at'
     ];
+
+    public function __construct() {
+        for ($i = 1; $i <= 31; $i++) {
+            array_push($this->fillable, "day{$i}_start_time", "day{$i}_end_time", "day{$i}_break_time");
+        }
+    }
+
 }

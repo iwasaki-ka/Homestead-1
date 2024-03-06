@@ -84,13 +84,9 @@ h2{
 
 }
 
-.comment{
-    display: flex;
-}
-
-.comment button{
-    width:90px;
-    height: 30px;
+form{
+    width: 500px;
+    margin: auto
 }
 
 .dele{

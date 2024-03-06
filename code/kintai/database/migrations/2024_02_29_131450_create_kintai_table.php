@@ -17,14 +17,16 @@ class CreateKintaiTable extends Migration
             $table->increments('id');
             $table->string('syain_number');
             $table->date('date');
-            $table->datetime('start_time');
-            $table->datetime('end_time')->nullable();
-            $table->timestamps();
+
+            for ($i = 1; $i <= 31; $i++) {
+                $table->datetime("day{$i}_start_time")->nullable();
+                $table->datetime("day{$i}_end_time")->nullable();
+                $table->integer("day{$i}_break_time")->nullable();
+            }
 
             $table->foreign('syain_number')->references('syain_number')->on('syain');
         });
     }
-
     /**
      * Reverse the migrations.
      *
