@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Authenticatable as AuthenticableTrait;
+use Illuminate\Support\Facades\Log;
 
 class Syain extends Model implements Authenticatable
 {
@@ -15,11 +16,20 @@ class Syain extends Model implements Authenticatable
 
 
     protected $fillable = [
+        'id',
         'syain_number',
         'name',
         'syozoku',
         'user_type',
     ];
+
+    public function isRoumusi()
+{
+    $isRoumusi = $this->user_type == '労務士';
+
+    return $isRoumusi;
+}
+
 }
 
 ?>

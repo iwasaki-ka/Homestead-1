@@ -3,6 +3,8 @@
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DakokuController;
 use App\Http\Controllers\KinmuhyouController;
+use App\Http\Controllers\KanrisyaController;
+use App\Http\Controllers\SearchController;
 
 Route::get('/', function () {return view('login');})->name('login');
 
@@ -30,6 +32,31 @@ Route::get('/kinmuhyou_detail/{syain_number}/{month}', [KinmuhyouController::cla
 
 Route::get('/edit_kintai/{syain_number}/{date}', [KinmuhyouController::class, 'editKintai'])->name('edit_kintai');
 
-Route::put('/update_kintai/{id}', [KinmuhyouController::class, 'updateKintai'])->name('update_kintai');
+Route::put('/update_kintai/{syain_number}/{date}', [KinmuhyouController::class, 'updateKintai'])->name('update_kintai');
+
+Route::get('/search/{syain_number}', [SearchController::class, 'showSearchPage'])->name('search');
+
+Route::get('/search_result/{syain_number}', [SearchController::class, 'showResult'])->name('search_result');
+
+Route::get('/syainjouhou/{syain_number}', [SearchController::class, 'showSyainJouhou'])->name('syainjouhou');
+
+Route::get('/kintai_detail/{syain_number}/{year}/{month}', [SearchController::class, 'showKintaiDetail'])->name('kintai_detail');
+
+Route::get('/edit_syain/{syain_number}', [SearchController::class, 'editSyain'])->name('edit_syain');
+
+Route::put('/update_syain/{syain_number}', [KanrisyaController::class, 'updateSyain'])->name('update_syain');
+
+Route::get('/newsyain', [KanrisyaController::class, 'newSyain'])->name('newsyain');
+
+Route::post('/create_syain', [KanrisyaController::class, 'create_syain'])->name('create_syain');
+
+Route::get('/roumusi_search/{syain_number}', [SearchController::class, 'showSearchPage'])->name('roumusi_search');
+
+Route::get('/roumusi_search_result/{syain_number}', [SearchController::class, 'showResult'])->name('roumusi_search_result');
+
+Route::get('/roumusi_syainjouhou/{syain_number}', [SearchController::class, 'showSyainJouhou'])->name('roumusi_syainjouhou');
+
+Route::get('/roumusi_kintai_detail/{syain_number}/{year}/{month}', [SearchController::class, 'showKintaiDetail'])->name('roumusi_kintai_detail');
+
 
 ?>

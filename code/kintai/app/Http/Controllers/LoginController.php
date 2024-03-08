@@ -47,7 +47,7 @@ class LoginController extends Controller
             switch ($user->user_type) {
                 case '社員':
                     return $this->show($user->syain_number, 'syain');
-                case '社員管理者':
+                case '管理者':
                     return $this->show($user->syain_number, 'kanrisya');
                 case '労務士':
                     return $this->show($user->syain_number, 'roumusi');

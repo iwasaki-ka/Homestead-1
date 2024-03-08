@@ -108,3 +108,32 @@ form{
     font-size: 12px;
 }
 
+#syozoku {
+    font-size: 18px;
+}
+
+.syainjouhou_table {
+    border-collapse: collapse;
+    margin: auto;
+}
+
+.syainjouhou_table th, .syainjouhou_table td {
+    border: 1px solid black;
+    text-align: center;
+    padding: 10px;
+}
+
+.edit_syain
+{
+    text-align: right;
+}
+
+.edit_syain button
+{
+    margin-right: 60px;
+    margin-top: 20px;
+}
+
+#user_type {
+    font-size: 18px;
+}

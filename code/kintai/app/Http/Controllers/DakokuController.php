@@ -22,13 +22,18 @@ class DakokuController extends Controller
         $kintai = Kintai::where('syain_number', $request->syain_number)
                         ->where('date', date('Y-m-d'))
                         ->first();
-        if (!$kintai) {
-            $kintai = new Kintai;
-            $kintai->syain_number = $request->syain_number;
-            $kintai->date = date('Y-m-d');
-        }
+                        if (!$kintai) {
+                            $kintai = new Kintai;
+                            $kintai->syain_number = $request->syain_number;
+                            $kintai->date = date('Y-m-d');
+                            for ($i = 1; $i <= 31; $i++) {
+                                $day_i = sprintf('%02d', $i);
+                                $kintai["day{$day_i}_start_time"] = '1000-01-01 00:00:00';
+                                $kintai["day{$day_i}_end_time"] = '1000-01-01 00:00:00';
+                            }
+                        }
 
-        if ($kintai["day{$day}_start_time"] == null) {
+        if ($kintai["day{$day}_start_time"] == '1000-01-01 00:00:00') {
             $kintai["day{$day}_start_time"] = date('Y-m-d H:i:s');
             $kintai->save();
         }
@@ -45,7 +50,7 @@ class DakokuController extends Controller
                          ->first();
         if ($kintai) {
 
-            if ($kintai["day{$day}_end_time"] == null) {
+            if ($kintai["day{$day}_end_time"] == '1000-01-01 00:00:00') {
                 $kintai["day{$day}_end_time"] = date('Y-m-d H:i:s');
                 $kintai["day{$day}_break_time"] = 60;
                 $kintai->save();

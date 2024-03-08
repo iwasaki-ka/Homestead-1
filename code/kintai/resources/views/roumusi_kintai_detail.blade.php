@@ -5,7 +5,7 @@
             <p>社員番号: {{ $syain_number }}  氏名: {{ session('user')->name }}</p>
        </div>
       </div>
-    <table class="kintai-table">
+      <table class="kintai-table">
         <tr>
             <td>出勤日</td>
             <td>出勤時間</td>
@@ -32,12 +32,11 @@
                 @endphp
                 <td>{{ isset($record["day{$day}_break_time"]) ? sprintf('%02d:%02d', floor($record["day{$day}_break_time"] / 60), $record["day{$day}_break_time"] % 60) : '' }}</td>
                 <td>{{ $work_hours > 0 ? sprintf('%02d:%02d', $hours, $minutes) : '' }}</td>
-                <td><a href="{{ route('edit_kintai', ['syain_number' => $syain_number, 'date' => \Carbon\Carbon::createFromFormat('Y-m-d', $record->date)->startOfMonth()->addDays($day - 1)->format('Y-m-d')]) }}">変更</a></td>
             </tr>
         @endfor
     @endforeach
     </table>
-    <form method="GET" action="{{ route('showKintai', ['syain_number' => $syain_number]) }}">
+    <form method="GET" action="{{ route('roumusi_syainjouhou', ['syain_number' => $syain_number]) }}">
         @csrf
         <button type="submit">戻る</button>
     </form>

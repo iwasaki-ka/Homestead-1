@@ -13,20 +13,20 @@
     </form>
 </div>
 @if($kintai)
-    @if($kintai["day{$day}_start_time"] && $kintai["day{$day}_end_time"] == null)
+@if($kintai["day{$day}_start_time"] && ($kintai["day{$day}_end_time"] == null || $kintai["day{$day}_end_time"] == '1000-01-01 00:00:00'))
     <div class="dakoku_button">
         <form method="post" action="{{ route('dakoku.taikin', ['syain_number' => $syain_number]) }}">
             @csrf
             @method('PUT')
-            <input type="submit" value="退勤" {{ $kintai["day{$day}_end_time"] ? 'disabled' : '' }}>
+            <input type="submit" value="退勤" {{ $kintai["day{$day}_end_time"] != '1000-01-01 00:00:00' ? 'disabled' : '' }}>
         </form>
    </div>
    @endif
    <div>
-    @if($kintai["day{$day}_start_time"] != "00:00:00")
+    @if($kintai["day{$day}_start_time"] != "1000-01-01 00:00:00")
         <p>出勤時刻: {{ $kintai["day{$day}_start_time"] }}</p>
     @endif
-    @if($kintai["day{$day}_end_time"] != "00:00:00")
+    @if($kintai["day{$day}_end_time"] != "1000-01-01 00:00:00")
         <p>退勤時刻: {{ $kintai["day{$day}_end_time"] }}</p>
     @endif
 @endif

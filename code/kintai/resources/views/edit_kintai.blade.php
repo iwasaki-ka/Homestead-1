@@ -2,10 +2,10 @@
     <div class="smalltitle">
         <h2>勤務記録変更</h2>
         <div class="loginjouhou">
-            <p>社員番号: {{ $kintai->syain_number }}  氏名: {{ session('user')->name }}</p>
+            <p>社員番号: {{ $kintai ? $kintai->syain_number : $syain_number }}  氏名: {{ session('user')->name }}</p>
         </div>
     </div>
-    <form method="POST" action="{{ route('update_kintai', ['id' => $kintai->id]) }}">
+    <form method="POST" action="{{ route('update_kintai', ['syain_number' => $syain_number, 'date' => $date]) }}">
         @csrf
         @method('PUT')
         <label for="start_time">出勤時間:</label>
