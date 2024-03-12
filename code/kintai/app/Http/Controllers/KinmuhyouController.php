@@ -46,8 +46,9 @@ public function kinmuhyou_detail($syain_number, $month)
             $kintai_records[$day_padded] = $kintai_record;
         }
     }
+    $date = $year . '-' . $month;
 
-    return view('kinmuhyou_detail', ['syain_number' => $syain_number, 'month' => $month, 'kintai_records' => $kintai_records]);
+    return view('kinmuhyou_detail', ['syain_number' => $syain_number, 'month' => $month, 'kintai_records' => $kintai_records, 'date' => $date]);
 }
 
 public function editKintai($syain_number, $date)
@@ -100,6 +101,29 @@ public function updateKintai(Request $request, $syain_number, $date)
 
     return redirect()->route('kinmuhyou_detail', ['syain_number' => $syain_number, 'month' => $month]);
 }
+
+public function resetKintai($syain_number, $date)
+{
+    $date = new \DateTime($date);
+    $day = sprintf('%02d', $date->format('d'));
+    $month = $date->format('Y-m');
+
+
+    $kintai = Kintai::where('syain_number', $syain_number)
+                    ->where('date', 'like', $month . '%')
+                    ->first();
+
+    if ($kintai) {
+        $kintai["day{$day}_start_time"] = '1000-01-01 00:00:00';
+        $kintai["day{$day}_end_time"] = '1000-01-01 00:00:00';
+        $kintai["day{$day}_break_time"] = null;
+
+        $kintai->save();
+    }
+
+    return redirect()->back();
+}
+
 }
 
 

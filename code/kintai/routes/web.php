@@ -58,5 +58,6 @@ Route::get('/roumusi_syainjouhou/{syain_number}', [SearchController::class, 'sho
 
 Route::get('/roumusi_kintai_detail/{syain_number}/{year}/{month}', [SearchController::class, 'showKintaiDetail'])->name('roumusi_kintai_detail');
 
+Route::post('/kinmuhyou/reset/{syain_number}/{date}', [KinmuhyouController::class, 'resetKintai'])->name('reset_kintai');
 
 ?>

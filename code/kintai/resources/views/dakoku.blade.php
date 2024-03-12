@@ -9,11 +9,11 @@
     <form method="post" action="{{ route('dakoku.syukkin') }}">
         @csrf
         <input type="hidden" name="syain_number" value="{{ $syain_number }}">
-        <input type="submit" value="出勤" {{ $kintai && $kintai["day{$day}_start_time"] ? 'disabled' : '' }}>
+        <input type="submit" value="出勤" {{ $kintai && $kintai["day{$day}_start_time"] != '1000-01-01 00:00:00' ? 'disabled' : '' }}>
     </form>
 </div>
 @if($kintai)
-@if($kintai["day{$day}_start_time"] && ($kintai["day{$day}_end_time"] == null || $kintai["day{$day}_end_time"] == '1000-01-01 00:00:00'))
+@if($kintai["day{$day}_start_time"] != '1000-01-01 00:00:00' && ($kintai["day{$day}_end_time"] == null || $kintai["day{$day}_end_time"] == '1000-01-01 00:00:00'))
     <div class="dakoku_button">
         <form method="post" action="{{ route('dakoku.taikin', ['syain_number' => $syain_number]) }}">
             @csrf

@@ -33,6 +33,10 @@
                 <td>{{ isset($record["day{$day}_break_time"]) ? sprintf('%02d:%02d', floor($record["day{$day}_break_time"] / 60), $record["day{$day}_break_time"] % 60) : '' }}</td>
                 <td>{{ $work_hours > 0 ? sprintf('%02d:%02d', $hours, $minutes) : '' }}</td>
                 <td><a href="{{ route('edit_kintai', ['syain_number' => $syain_number, 'date' => \Carbon\Carbon::createFromFormat('Y-m-d', $record->date)->startOfMonth()->addDays($day - 1)->format('Y-m-d')]) }}">変更</a></td>
+                <td><form method="POST" action="{{ route('reset_kintai', ['syain_number' => $syain_number, 'date' => \Carbon\Carbon::createFromFormat('Y-m-d', $record->date)->startOfMonth()->addDays($day - 1)->format('Y-m-d')]) }}">
+                    @csrf
+                    <button type="submit" class="reset-button">リセット</button>
+                </form></td>
             </tr>
         @endfor
     @endforeach
